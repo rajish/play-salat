@@ -4,16 +4,17 @@ import sbt.Keys._
 object ProjectBuild extends Build {
 
   lazy val buildVersion =  "1.1-SNAPSHOT"
+  lazy val systemProperties = new sys.SystemProperties()
 
   lazy val root = Project(id = "play-plugins-salat", base = file("."), settings = Project.defaultSettings).settings(
     organization := "se.radley",
     description := "MongoDB Salat plugin for PlayFramework 2",
     version := buildVersion,
-    scalaVersion := "2.9.1",
+//    scalaVersion := systemProperties.getOrElse("scala.version", "2.9.2"),
     resolvers += "Typesafe Releases" at "http://repo.typesafe.com/typesafe/releases/",
     resolvers += "Typesafe Snapshots" at "http://repo.typesafe.com/typesafe/snapshots/",
-    libraryDependencies += "play" %% "play" % "2.0.3",
-    libraryDependencies += "play" %% "play-test" % "2.0.3" % "test",
+    libraryDependencies += "play" %% "play" % "2.1-SNAPSHOT",
+    libraryDependencies += "play" %% "play-test" % "2.1-SNAPSHOT" % "test",
     libraryDependencies += "com.novus" %% "salat" % "1.9.1",
 
     publishMavenStyle := true,
